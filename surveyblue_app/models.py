@@ -23,7 +23,7 @@ class Question(models.Model):
 
     description = models.CharField(max_length=500)
     question_type = models.IntegerField(choices=QUESTION_TYPE)
-    options = models.ManyToManyField(OptionResponse,
+    options = models.ManyToManyField(OptionResponse, related_name="options",
                                      through='Question_OptionResponse')
 
     def __str__(self):
