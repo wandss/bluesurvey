@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework.generics import ListCreateAPIView
 
-# Create your views here.
+from .models import Question
+from .serializers import QuestionSerializer
+
+
+class QuestionListCreate(ListCreateAPIView):
+
+    serializer_class = QuestionSerializer
+    queryset = Question.objects.all()

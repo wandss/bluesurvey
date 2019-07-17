@@ -42,7 +42,7 @@ class Survey(models.Model):
     objective = models.TextField(blank=True, null=True)
     begin_date = models.DateField()
     end_date = models.DateField()
-    create_date = models.DateTimeField(default=timezone.now)
+    create_date = models.DateTimeField(auto_now_add=True)
     published_date = models.DateTimeField(blank=True, null=True)
     author = models.CharField(max_length=100)
     status = models.IntegerField(choices=STATUS)
@@ -65,7 +65,7 @@ class Client(models.Model):
     name = models.CharField(max_length=300)
     email = models.EmailField(unique=True)
     cpf = models.CharField(max_length=11, unique=True)
-    create_date = models.DateTimeField(default=timezone.now)
+    create_date = models.DateTimeField(auto_now_add=True)
     surveys = models.ManyToManyField(Survey,
                                      through='Client_Survey')
 
@@ -90,3 +90,12 @@ class Survey_Question(models.Model):
 class Client_Survey(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     survey = models.ForeignKey(Survey, on_delete=models.CASCADE)
+
+
+class Answer(models.Model):
+
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    survey = models.ForeignKey(Survey, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    option_response = models.ForeignKey(OptionResponse, on_delete=models.CASCADE)
+    justificativa = models.TextField(blank=True, null=True)
