@@ -3,5 +3,5 @@ from django.conf.urls import url, include
 
 urlpatterns = [
     url(r'admin/', admin.site.urls),
-    url(r'api/v1/survey/', include('surveyblue_app.urls')),
+    url(r'api/v1/questions/', include('question.urls', namespace="questions")),
 ]
