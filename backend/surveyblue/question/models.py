@@ -34,6 +34,5 @@ class Question_OptionResponse(models.Model):
     option_response = models.ForeignKey(OptionResponse,
                                         on_delete=models.CASCADE)
 
-
     class Meta:
         unique_together = ['question', 'option_response']

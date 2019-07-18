@@ -18,7 +18,6 @@ class QuestionSerializer(ModelSerializer):
         model = Question
         fields = '__all__'
 
-
     def create(self, validated_data):
 
         options_data = validated_data.pop('options', [])
@@ -29,6 +28,5 @@ class QuestionSerializer(ModelSerializer):
             question_option = Question_OptionResponse.objects.create(
                 question=question, option_response=option)
             question.question_optionresponse_set.add(question_option)
-
 
         return question
