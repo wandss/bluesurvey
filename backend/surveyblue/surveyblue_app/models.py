@@ -82,7 +82,7 @@ class Client(models.Model):
 
 
 
-# NAO UTILIZADOS POR ENQUANTO
+# UTILIZADO EM survey.models
 # class Survey_Question(models.Model):
 #
 #     survey = models.ForeignKey(Survey, on_delete=models.CASCADE)

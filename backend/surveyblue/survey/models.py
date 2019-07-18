@@ -22,7 +22,7 @@ class Survey(models.Model):
     author = models.ForeignKey(User, on_delete=models.PROTECT,
                                related_name="author")
     status = models.IntegerField(choices=STATUS)
-    questions = models.ManyToManyField(Question)
+    questions = models.ManyToManyField(Question, through='Survey_Question')
     clients = models.ManyToManyField(User)
 
     def publish(self):
@@ -31,6 +31,17 @@ class Survey(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Survey_Question(models.Model):
+    LAYOUT = (
+        (0, "Vertical"),
+        (1, "Horizontal"),
+    )
+
+    survey = models.ForeignKey(Survey, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    layout = models.IntegerField(choices=LAYOUT)
 
 
 class Answer(models.Model):
