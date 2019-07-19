@@ -9,6 +9,7 @@ class OptionResponseSerializer(ModelSerializer):
         model = OptionResponse
         fields = '__all__'
 
+
 class QuestionSerializer(ModelSerializer):
 
     options = OptionResponseSerializer(many=True)
@@ -27,15 +28,4 @@ class QuestionSerializer(ModelSerializer):
             option_instance = OptionResponse.objects.create(**option)
             question.options.add(option_instance)
 
-
         return question
-
-
-
-#         for options in options_data:
-#             option = OptionResponse.objects.create(**options)
-#             question_option = Question_OptionResponse.objects.create(
-#                 question=question, option_response=option)
-#             question.question_optionresponse_set.add(question_option)
-#
-#         return question
