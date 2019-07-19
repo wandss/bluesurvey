@@ -42,7 +42,7 @@ class Survey_Question(models.Model):
 
     survey = models.ForeignKey(Survey, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    layout = models.IntegerField(choices=LAYOUT)
+    layout = models.IntegerField(choices=LAYOUT, null=True)
 
 
 class Answer(models.Model):

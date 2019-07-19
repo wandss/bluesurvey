@@ -9,6 +9,9 @@ class OptionResponseSerializer(ModelSerializer):
         model = OptionResponse
         fields = '__all__'
 
+    def validate(self, data):
+        import pdb;pdb.set_trace()#DEBUG
+
 
 class QuestionSerializer(ModelSerializer):
 
@@ -17,6 +20,8 @@ class QuestionSerializer(ModelSerializer):
     class Meta:
         model = Question
         fields = '__all__'
+
+
 
     def create(self, validated_data):
 
