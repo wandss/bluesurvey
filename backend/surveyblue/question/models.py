@@ -1,10 +1,9 @@
 from django.db import models
-from django.utils.translation import gettext as _
 
 
 class OptionResponse(models.Model):
 
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
         return self.description
@@ -12,6 +11,9 @@ class OptionResponse(models.Model):
 
 
 class Question(models.Model):
+    # TODO: Overwrite save method
+    # when QUESTION_TYPE is 3 or scale,
+    # options must be provided
 
     QUESTION_TYPE = (
         (0, "Simple Input"),
@@ -21,9 +23,9 @@ class Question(models.Model):
         (4, "Scale")
     )
 
-    description = models.CharField(_('Dresciption'), max_length=500)
-    question_type = models.IntegerField(_('Question Type'), choices=QUESTION_TYPE)
-    options = models.ManyToManyField(OptionResponse)
+    description = models.CharField(max_length=500)
+    question_type = models.IntegerField(choices=QUESTION_TYPE)
+    options = models.ManyToManyField(OptionResponse, blank=True)
    # options = models.ManyToManyField(OptionResponse, related_name="option",
    #                                  through='Question_OptionResponse')
 
@@ -32,14 +34,14 @@ class Question(models.Model):
 
 
 # class Question_OptionResponse(models.Model):
-# 
+#
 #     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 #     option_response = models.ForeignKey(OptionResponse,
 #                                         on_delete=models.CASCADE)
-# 
+#
 #     class Meta:
 #         unique_together = ['question', 'option_response']
-# 
+#
 #     def __str__(self):
 #         return self.question.description
 
